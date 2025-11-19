@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Jeu Snake classique avec scores et niveaux de difficulté">
+    <title>🐍 Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Menu Principal -->
+        <div class="menu" id="mainMenu">
+            <h1>🐍 SNAKE</h1>
+            <p class="subtitle">Jeu classique du serpent</p>
+            
+            <div class="menu-buttons">
+                <button class="menu-btn" id="playBtn">
+                    <span class="btn-icon">🎮</span>
+                    <span class="btn-text">Jouer</span>
+                </button>
+                <button class="menu-btn" id="settingsBtn">
+                    <span class="btn-icon">⚙️</span>
+                    <span class="btn-text">Paramètres</span>
+                </button>
+                <button class="menu-btn" id="leaderboardBtn">
+                    <span class="btn-icon">🏆</span>
+                    <span class="btn-text">Meilleurs Scores</span>
+                </button>
+            </div>
+
+            <div class="controls-info">
+                <h3>🎮 Contrôles</h3>
+                <div class="control-grid">
+                    <div class="control-item">
+                        <span class="key">↑ ↓ ← →</span>
+                        <span>Flèches directionnelles</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">W A S D</span>
+                        <span>Alternative</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">ESPACE</span>
+                        <span>Pause</span>
+                    </div>
+                    <div class="control-item">
+                        <span class="key">R</span>
+                        <span>Recommencer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel hidden" id="settingsPanel">
+            <h2>⚙️ Paramètres</h2>
+            
+            <div class="setting-item">
+                <label for="difficulty">Difficulté</label>
+                <select id="difficulty">
+                    <option value="easy">🟢 Facile (Lent)</option>
+                    <option value="medium" selected>🟡 Moyen</option>
+                    <option value="hard">🔴 Difficile (Rapide)</option>
+                    <option value="extreme">💀 Extrême</option>
+                </select>
+            </div>
+
+            <div class="setting-item">
+                <label for="gridSize">Taille de la grille</label>
+                <select id="gridSize">
+                    <option value="15">Petit (15x15)</option>
+                    <option value="20" selected>Moyen (20x20)</option>
+                    <option value="25">Grand (25x25)</option>
+                </select>
+            </div>
+
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="wallsEnabled" checked>
+                    Murs (Game Over si collision)
+                </label>
+            </div>
+
+            <div class="setting-item">
+                <label>
+                    <input type="checkbox" id="soundEnabled" checked>
+                    Sons activés
+                </label>
+            </div>
+
+            <button class="menu-btn" id="backToMenuBtn">← Retour</button>
+        </div>
+
+        <!-- Leaderboard -->
+        <div class="leaderboard-panel hidden" id="leaderboardPanel">
+            <h2>🏆 Meilleurs Scores</h2>
+            <div class="leaderboard-list" id="leaderboardList">
+                <p class="empty-leaderboard">Aucun score enregistré</p>
+            </div>
+            <button class="menu-btn" id="clearScoresBtn">🗑️ Effacer les scores</button>
+            <button class="menu-btn" id="backToMenuBtn2">← Retour</button>
+        </div>
+
+        <!-- Game Screen -->
+        <div class="game-screen hidden" id="gameScreen">
+            <div class="game-header">
+                <div class="game-info">
+                    <div class="info-item">
+                        <span class="info-label">Score</span>
+                        <span class="info-value" id="score">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Meilleur</span>
+                        <span class="info-value" id="highScore">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Niveau</span>
+                        <span class="info-value" id="level">1</span>
+                    </div>
+                </div>
+                <button class="pause-btn" id="pauseBtn">⏸️</button>
+            </div>
+
+            <canvas id="snakeCanvas" width="600" height="600"></canvas>
+
+            <div class="game-footer">
+                <button class="game-btn" id="restartBtn">🔄 Recommencer</button>
+                <button class="game-btn" id="quitBtn">🚪 Quitter</button>
+            </div>
+        </div>
+
+        <!-- Pause Menu -->
+        <div class="pause-menu hidden" id="pauseMenu">
+            <h2>⏸️ Pause</h2>
+            <div class="current-score">
+                <p>Score actuel</p>
+                <span id="pauseScore">0</span>
+            </div>
+            <div class="pause-buttons">
+                <button class="menu-btn" id="resumeBtn">▶️ Reprendre</button>
+                <button class="menu-btn" id="restartBtn2">🔄 Recommencer</button>
+                <button class="menu-btn" id="mainMenuBtn">🏠 Menu Principal</button>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div class="modal hidden" id="gameOverModal">
+            <div class="modal-content">
+                <h2 class="game-over-title">💀 Game Over!</h2>
+                <div class="final-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Score Final</span>
+                        <span class="stat-value" id="finalScore">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Niveau atteint</span>
+                        <span class="stat-value" id="finalLevel">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Longueur</span>
+                        <span class="stat-value" id="finalLength">3</span>
+                    </div>
+                </div>
+                <p class="high-score-msg" id="highScoreMsg"></p>
+                <div class="modal-buttons">
+                    <button class="menu-btn" id="playAgainBtn">🔄 Rejouer</button>
+                    <button class="menu-btn" id="menuBtn">🏠 Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Créé par Adam Beloucif | <a href="https://github.com/Adam-Blf/Snake-Game" target="_blank">GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
