@@ -1,53 +1,271 @@
 /* =====================================================
-   Global Styles & Reset
+   CYBERPUNK SNAKE - ULTIMATE EDITION
    ===================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Rajdhani:wght@500;700&display=swap');
+
+:root {
+    --neon-green: #0f0;
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --neon-red: #ff003c;
+    --dark-bg: #050505;
+    --grid-line: rgba(0, 243, 255, 0.1);
+    --glass-bg: rgba(10, 10, 10, 0.8);
+    --glass-border: rgba(0, 243, 255, 0.3);
+    
+    --shadow-glow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green), 0 0 40px var(--neon-green);
+    --text-glow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --primary-color: #10b981;
-    --primary-dark: #059669;
-    --secondary-color: #0ea5e9;
-    --danger-color: #ef4444;
-    --dark-bg: #0f1419;
-    --card-bg: #1a1a2e;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --border-color: #2d3748;
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--dark-bg);
+    background-image: 
+        linear-gradient(0deg, transparent 24%, var(--grid-line) 25%, var(--grid-line) 26%, transparent 27%, transparent 74%, var(--grid-line) 75%, var(--grid-line) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--grid-line) 25%, var(--grid-line) 26%, transparent 27%, transparent 74%, var(--grid-line) 75%, var(--grid-line) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text-primary);
-    padding: 20px;
+    color: #fff;
+    overflow: hidden;
+    perspective: 1000px;
 }
 
-/* =====================================================
-   Game Container
-   ===================================================== */
+/* CRT Scanline Effect */
+body::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+
 .game-container {
-    max-width: 700px;
-    width: 100%;
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(0); }
+    50% { transform: translateY(-10px) rotateX(2deg); }
 }
 
 /* =====================================================
-   Menu
+   Menu Styles
    ===================================================== */
 .menu {
-    background: var(--card-bg);
-    border-radius: 25px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+    max-width: 500px;
+    width: 90vw;
+}
+
+.menu h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2.5rem;
+    color: var(--neon-green);
+    text-shadow: var(--shadow-glow);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.subtitle {
+    color: var(--neon-blue);
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    margin-bottom: 3rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.menu-btn {
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 1rem 2rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--neon-blue);
+    transition: all 0.3s;
+    z-index: -1;
+}
+
+.menu-btn:hover {
+    color: #000;
+    box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.menu-btn:hover::before {
+    left: 0;
+}
+
+/* =====================================================
+   Game Board
+   ===================================================== */
+#gameBoard {
+    border: 4px solid var(--neon-blue);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 20px var(--neon-blue), inset 0 0 20px rgba(0, 243, 255, 0.2);
+    display: none; /* Hidden by default */
+}
+
+/* Snake & Food (Applied via JS usually, but defining classes here) */
+.snake-body {
+    background: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green);
+    border-radius: 2px;
+}
+
+.food {
+    background: var(--neon-red);
+    box-shadow: 0 0 15px var(--neon-red);
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+/* =====================================================
+   Score Panel
+   ===================================================== */
+.score-panel {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: #fff;
+}
+
+.score-box {
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+/* =====================================================
+   Controls Info
+   ===================================================== */
+.controls-info {
+    margin-top: 2rem;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1rem;
+}
+
+.control-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.key {
+    display: inline-block;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border-bottom: 2px solid #111;
+    color: #fff;
+    font-family: monospace;
+    margin-right: 5px;
+}
+
+/* =====================================================
+   Mobile Controls
+   ===================================================== */
+.mobile-controls {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .mobile-controls {
+        display: grid;
+    }
+    
+    .menu {
+        padding: 1.5rem;
+    }
+    
+    .menu h1 {
+        font-size: 1.8rem;
+    }
+}
+
+.d-pad-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    touch-action: manipulation;
+}
+
+.d-pad-btn:active {
+    background: var(--neon-blue);
+    color: #000;
+}
+
+
+
+
     padding: 40px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -137,462 +355,20 @@ body {
     font-size: 0.85rem;
 }
 
-/* =====================================================
-   Settings Panel
-   ===================================================== */
-.settings-panel {
-    background: var(--card-bg);
-    border-radius: 25px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    width: 100%;
-}
 
-.settings-panel h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-align: center;
-}
 
-.setting-item {
-    margin-bottom: 25px;
-}
 
-.setting-item label {
-    display: block;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: var(--text-secondary);
-}
 
-.setting-item select {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 2px solid var(--border-color);
-    border-radius: 10px;
-    background: var(--dark-bg);
-    color: var(--text-primary);
-    cursor: pointer;
-}
 
-.setting-item input[type="checkbox"] {
-    margin-right: 10px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
 
-/* =====================================================
-   Leaderboard
-   ===================================================== */
-.leaderboard-panel {
-    background: var(--card-bg);
-    border-radius: 25px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    width: 100%;
-}
 
-.leaderboard-panel h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-align: center;
-}
 
-.leaderboard-list {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-}
 
-.leaderboard-entry {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 15px;
-    margin-bottom: 10px;
-    background: var(--dark-bg);
-    border-radius: 12px;
-    border-left: 4px solid var(--primary-color);
-    animation: slideIn 0.3s ease;
-}
 
-.entry-rank {
-    font-size: 1.5rem;
-    font-weight: 700;
-    min-width: 40px;
-    text-align: center;
-}
 
-.entry-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
 
-.entry-score {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
 
-.entry-info {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
 
-.entry-date {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
 
-.empty-leaderboard {
-    text-align: center;
-    color: var(--text-secondary);
-    font-style: italic;
-    padding: 40px;
-}
 
-/* =====================================================
-   Game Screen
-   ===================================================== */
-.game-screen {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
 
-.game-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.game-info {
-    display: flex;
-    gap: 30px;
-    flex: 1;
-}
-
-.info-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.info-label {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.info-value {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.pause-btn {
-    padding: 12px 20px;
-    font-size: 1.5rem;
-    border: none;
-    border-radius: 10px;
-    background: var(--primary-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.pause-btn:hover {
-    background: var(--primary-dark);
-    transform: scale(1.1);
-}
-
-/* Canvas */
-#snakeCanvas {
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-    background: var(--dark-bg);
-    max-width: 100%;
-    height: auto;
-}
-
-.game-footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.game-btn {
-    padding: 15px 30px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    background: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.game-btn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-/* =====================================================
-   Pause Menu
-   ===================================================== */
-.pause-menu {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--card-bg);
-    border-radius: 25px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
-    z-index: 1000;
-    animation: scaleIn 0.3s ease;
-}
-
-.pause-menu h2 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.current-score {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.current-score p {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin-bottom: 10px;
-}
-
-.current-score span {
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.pause-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-width: 300px;
-}
-
-/* =====================================================
-   Modal
-   ===================================================== */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-}
-
-.modal-content {
-    background: var(--card-bg);
-    border-radius: 25px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    animation: scaleIn 0.3s ease;
-    max-width: 500px;
-    width: 90%;
-}
-
-.game-over-title {
-    font-size: 3rem;
-    margin-bottom: 30px;
-}
-
-.final-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: var(--dark-bg);
-    border-radius: 10px;
-}
-
-.stat-label {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-}
-
-.stat-value {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary-color);
-}
-
-.high-score-msg {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fbbf24;
-    margin-bottom: 20px;
-    min-height: 30px;
-}
-
-.modal-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* =====================================================
-   Footer
-   ===================================================== */
-footer {
-    text-align: center;
-    color: var(--text-secondary);
-    margin-top: 20px;
-}
-
-footer a {
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-footer a:hover {
-    color: var(--primary-color);
-}
-
-/* =====================================================
-   Utility Classes
-   ===================================================== */
-.hidden {
-    display: none !important;
-}
-
-/* =====================================================
-   Animations
-   ===================================================== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        transform: translate(-50%, -50%) scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes wiggle {
-    0%, 100% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(-5deg);
-    }
-    75% {
-        transform: rotate(5deg);
-    }
-}
-
-/* =====================================================
-   Responsive Design
-   ===================================================== */
-@media (max-width: 650px) {
-    #snakeCanvas {
-        width: 100%;
-        height: auto;
-    }
-
-    .menu h1 {
-        font-size: 3rem;
-    }
-
-    .game-info {
-        gap: 15px;
-    }
-
-    .info-value {
-        font-size: 1.5rem;
-    }
-
-    .control-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 500px) {
-    .menu, .settings-panel, .leaderboard-panel {
-        padding: 25px;
-    }
-
-    .menu h1 {
-        font-size: 2.5rem;
-    }
-
-    .game-header {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .game-footer {
-        flex-direction: column;
-    }
-
-    .pause-menu {
-        width: 90%;
-        padding: 30px 20px;
-    }
-
-    .pause-buttons {
-        min-width: auto;
-    }
-}
