@@ -25,7 +25,8 @@ let settings = {
     difficulty: 'medium',
     gridSize: 20,
     wallsEnabled: true,
-    soundEnabled: true
+    soundEnabled: true,
+    keyboardLayout: 'azerty'
 };
 
 // Speed configurations (ms per frame)
@@ -68,7 +69,8 @@ const elements = {
     difficulty: document.getElementById('difficulty'),
     gridSize: document.getElementById('gridSize'),
     wallsEnabled: document.getElementById('wallsEnabled'),
-    soundEnabled: document.getElementById('soundEnabled')
+    soundEnabled: document.getElementById('soundEnabled'),
+    keyboardLayout: document.getElementById('keyboardLayout')
 };
 
 // ===================================================
@@ -589,48 +591,50 @@ elements.soundEnabled.addEventListener('change', (e) => {
     settings.soundEnabled = e.target.checked;
 });
 
+elements.keyboardLayout.addEventListener('change', (e) => {
+    settings.keyboardLayout = e.target.value;
+});
+
 // Keyboard controls
 document.addEventListener('keydown', (e) => {
     if (!isGameRunning) return;
     
-    switch (e.key) {
-        case 'ArrowUp':
-        case 'w':
-        case 'W':
-            e.preventDefault();
-            changeDirection({ x: 0, y: -1 });
-            break;
-        case 'ArrowDown':
-        case 's':
-        case 'S':
-            e.preventDefault();
-            changeDirection({ x: 0, y: 1 });
-            break;
-        case 'ArrowLeft':
-        case 'a':
-        case 'A':
-            e.preventDefault();
-            changeDirection({ x: -1, y: 0 });
-            break;
-        case 'ArrowRight':
-        case 'd':
-        case 'D':
-            e.preventDefault();
-            changeDirection({ x: 1, y: 0 });
-            break;
-        case ' ':
-            e.preventDefault();
-            if (isPaused) {
-                resumeGame();
-            } else {
-                pauseGame();
-            }
-            break;
-        case 'r':
-        case 'R':
-            e.preventDefault();
-            initGame();
-            break;
+    const key = e.key.toLowerCase();
+    const isAzerty = settings.keyboardLayout === 'azerty';
+
+    // Up
+    if (key === 'arrowup' || (isAzerty ? key === 'z' : key === 'w')) {
+        e.preventDefault();
+        changeDirection({ x: 0, y: -1 });
+    }
+    // Down
+    else if (key === 'arrowdown' || key === 's') {
+        e.preventDefault();
+        changeDirection({ x: 0, y: 1 });
+    }
+    // Left
+    else if (key === 'arrowleft' || (isAzerty ? key === 'q' : key === 'a')) {
+        e.preventDefault();
+        changeDirection({ x: -1, y: 0 });
+    }
+    // Right
+    else if (key === 'arrowright' || key === 'd') {
+        e.preventDefault();
+        changeDirection({ x: 1, y: 0 });
+    }
+    // Pause
+    else if (key === ' ') {
+        e.preventDefault();
+        if (isPaused) {
+            resumeGame();
+        } else {
+            pauseGame();
+        }
+    }
+    // Restart
+    else if (key === 'r') {
+        e.preventDefault();
+        initGame();
     }
 });
 
