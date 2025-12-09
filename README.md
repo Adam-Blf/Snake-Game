@@ -1,3 +1,11 @@
+Dernier commit: 23/11/2025 | Langage principal: JavaScript | Nombre de langages: 3
+
+Construit avec les outils et technologies : 
+JavaScript, CSS, HTML
+
+🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
+
+
 # 🐍 Snake Game
 
 Jeu Snake classique revisité avec système de niveaux, obstacles dynamiques, classement et paramètres personnalisables.
