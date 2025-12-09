@@ -3,6 +3,20 @@
 
 ![Dernier commit](https://img.shields.io/github/last-commit/Adam-Blf/Snake-Game?style=flat&logo=git&logoColor=white&color=0080ff&label=Dernier%20commit) ![Langage principal](https://img.shields.io/github/languages/top/Adam-Blf/Snake-Game?style=flat&logo=git&logoColor=white&color=0080ff&label=Langage%20principal) ![Nombre de langages](https://img.shields.io/github/languages/count/Adam-Blf/Snake-Game?style=flat&logo=git&logoColor=white&color=0080ff&label=Nombre%20de%20langages)
 
+## 📝 Description
+Snake game with progressive levels, dynamic obstacles, leaderboard system, customizable difficulty, and sound effects.
+
+## ⚡ Fonctionnalités
+- Progressive difficulty with levels
+- Dynamic obstacles system
+- Local leaderboard (top 10)
+- 4 difficulty modes
+- Sound effects
+- Customizable grid and settings
+- Keyboard controls (WASD + Arrows)
+- ---
+
+
 ### Construit avec les outils et technologies : 
 
 ![JavaScript](https://img.shields.io/badge/-JavaScript-0080ff?style=flat) ![CSS](https://img.shields.io/badge/-CSS-0080ff?style=flat) ![HTML](https://img.shields.io/badge/-HTML-0080ff?style=flat)
