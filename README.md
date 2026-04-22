@@ -1,27 +1,4 @@
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/adambeloucif/) ![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=Adam-Blf.Snake-Game)
-
-
-![Dernier commit](https://img.shields.io/github/last-commit/Adam-Blf/Snake-Game?style=flat&logo=git&logoColor=white&color=0080ff&label=Dernier%20commit) ![Langage principal](https://img.shields.io/github/languages/top/Adam-Blf/Snake-Game?style=flat&logo=git&logoColor=white&color=0080ff&label=Langage%20principal) ![Nombre de langages](https://img.shields.io/github/languages/count/Adam-Blf/Snake-Game?style=flat&logo=git&logoColor=white&color=0080ff&label=Nombre%20de%20langages)
-
-## 📝 Description
-Snake game with progressive levels, dynamic obstacles, leaderboard system, customizable difficulty, and sound effects.
-
-## ⚡ Fonctionnalités
-- Progressive difficulty with levels
-- Dynamic obstacles system
-- Local leaderboard (top 10)
-- 4 difficulty modes
-- Sound effects
-- Customizable grid and settings
-- Keyboard controls (WASD + Arrows)
-- ---
-
-
-### Construit avec les outils et technologies : 
-
-![JavaScript](https://img.shields.io/badge/-JavaScript-0080ff?style=flat) ![CSS](https://img.shields.io/badge/-CSS-0080ff?style=flat) ![HTML](https://img.shields.io/badge/-HTML-0080ff?style=flat)
-
-🇫🇷 Français | 🇬🇧 Anglais | 🇪🇸 Espagnol | 🇮🇹 Italien | 🇵🇹 Portugais | 🇷🇺 Russe | 🇩🇪 Allemand | 🇹🇷 Turc
+![version](https://img.shields.io/badge/version-1.0.1-DC0A2D?style=flat-square) ![canvas](https://img.shields.io/badge/canvas-html5-141418?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-424242?style=flat-square) ![type](https://img.shields.io/badge/type-game-4CAF50?style=flat-square)
 
 # 🐍 Snake Game
 
