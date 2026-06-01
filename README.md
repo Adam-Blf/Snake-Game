@@ -15,6 +15,29 @@
 
 Jeu Snake classique revisité avec système de niveaux, obstacles dynamiques, classement et paramètres personnalisables.
 
+## Architecture
+
+```mermaid
+flowchart TB
+    HTML["index.html<br/>écrans · menu · jeu · game over"]
+    CSS["style.css<br/>thème · responsive"]
+    INPUT["Entrées clavier<br/>flèches · pause"]
+    LOOP["Game loop<br/>setInterval · update + render"]
+    UPDATE["update()<br/>déplacement · collisions · nourriture"]
+    OBST["addObstacle · levelUp<br/>obstacles · vitesse"]
+    RENDER["render()<br/>canvas 2D · serpent · grille"]
+    STORE["localStorage<br/>highScore · leaderboard"]
+
+    HTML --> CSS
+    HTML --> INPUT
+    INPUT --> LOOP
+    LOOP --> UPDATE
+    UPDATE --> OBST
+    UPDATE --> RENDER
+    UPDATE --> STORE
+    OBST --> RENDER
+```
+
 ## 🌟 Fonctionnalités
 
 ### Gameplay
