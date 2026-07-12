@@ -19,14 +19,14 @@ Jeu Snake classique revisité avec système de niveaux, obstacles dynamiques, cl
 
 ```mermaid
 flowchart TB
-    HTML["index.html<br/>écrans · menu · jeu · game over"]
-    CSS["style.css<br/>thème · responsive"]
-    INPUT["Entrées clavier<br/>flèches · pause"]
-    LOOP["Game loop<br/>setInterval · update + render"]
-    UPDATE["update()<br/>déplacement · collisions · nourriture"]
-    OBST["addObstacle · levelUp<br/>obstacles · vitesse"]
-    RENDER["render()<br/>canvas 2D · serpent · grille"]
-    STORE["localStorage<br/>highScore · leaderboard"]
+    HTML["index.html<br/>écrans - menu - jeu - game over"]
+    CSS["style.css<br/>thème - responsive"]
+    INPUT["Entrées clavier<br/>flèches - pause"]
+    LOOP["Game loop<br/>setInterval - update + render"]
+    UPDATE["update()<br/>déplacement - collisions - nourriture"]
+    OBST["addObstacle - levelUp<br/>obstacles - vitesse"]
+    RENDER["render()<br/>canvas 2D - serpent - grille"]
+    STORE["localStorage<br/>highScore - leaderboard"]
 
     HTML --> CSS
     HTML --> INPUT
@@ -344,7 +344,7 @@ Projet open source - libre d'utilisation pour projets personnels ou éducatifs.
 ---
 
 <p align="center">
-  <sub>Par <a href="https://adam.beloucif.com">Adam Beloucif</a> · Data Engineer & Fullstack Developer · <a href="https://github.com/Adam-Blf">GitHub</a> · <a href="https://www.linkedin.com/in/adambeloucif/">LinkedIn</a></sub>
+  <sub>Par <a href="https://adam.beloucif.com">Adam Beloucif</a> - Data Engineer & Fullstack Developer - <a href="https://github.com/Adam-Blf">GitHub</a> - <a href="https://www.linkedin.com/in/adambeloucif/">LinkedIn</a></sub>
 </p>
 
 
